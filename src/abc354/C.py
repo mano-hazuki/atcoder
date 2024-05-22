@@ -1,20 +1,23 @@
+import math
+
 N = int(input())
-L = []
-max_A = 0
-target_C = 0
+A_C_I = []
 for i in range(0, N):
-    A, C = map(int, input().split())
-    max_A = A if A > max_A else max_A
-    target_C = C if A == max_A else target_C
-    L.append(C)
-L.sort()
-left = -1
-right = N
-while right - left > 1:
-    mid = left + (right - left) // 2
-    if L[mid] >= target_C:
-        left = mid
-    else:
-        right = mid
+    A_C_I.append(list(map(int, input().split())))
+    A_C_I[i].append(i)
+A_C_I.sort()
+A_C_I.reverse()
 
+max_cost = math.inf
+ans = []
 
+for A, C, i in A_C_I:
+    if C <= max_cost:
+        ans.append(i + 1)
+        max_cost = C
+
+ans.sort()
+
+print(len(ans))
+for a in ans:
+    print(a, "", end="")
